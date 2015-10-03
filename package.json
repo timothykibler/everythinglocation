@@ -1,0 +1,19 @@
+{
+  "name": "elnodewrapper",
+  "version": "1.0.0",
+  "description": "Wrapper for www.everythinglocation.com API",
+  "main": "everythinglocation.js",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha"
+  },
+  "author": "Timothy Kibler <tecs717@aim.com> (http://github.com/timothykibler)",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "node-inspector": "^0.12.3"
+  },
+  "dependencies": {
+    "request": "^2.64.0"
+  }
+}
