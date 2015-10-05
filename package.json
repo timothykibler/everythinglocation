@@ -10,8 +10,11 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.3.0",
+    "chai-as-promised": "^5.1.0",
     "mocha": "^2.3.3",
-    "node-inspector": "^0.12.3"
+    "node-inspector": "^0.12.3",
+    "sinon": "^1.17.1",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "request": "^2.64.0"
