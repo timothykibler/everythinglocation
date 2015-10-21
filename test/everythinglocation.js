@@ -9,7 +9,7 @@ var chai = require('chai'),
 	el = require('../everythinglocation'),
 	authenticate = el.authenticate,
 	verify = el.verify,
-	complete = el.complete;
+	capture = el.capture;
 	chai.use(sinonChai);
 
 	describe('#authenticate()', function() {
@@ -74,9 +74,9 @@ var chai = require('chai'),
 		});
 	});
 
-	describe('#complete()', function() {
+	describe('#capture()', function() {
 		it('should exist', function() {
-			expect(complete).to.not.be.undefined;
+			expect(capture).to.not.be.undefined;
 		});
 		
 		describe('working callback', function() {
@@ -96,18 +96,18 @@ var chai = require('chai'),
 			});	
 
 			it('should have a working callback', function() {
-				complete(data, spy);
+				capture(data, spy);
 				expect(spy).to.have.been.called;
 			});	
 
 			it('should give back an OK status', function() {
-				complete(data, function(result) {
+				capture(data, function(result) {
 					expect(result).to.have.property('Status').equal('OK');
 				});
 			});
 
 			it('should have an array of results', function() {
-				complete(data, function(result) {
+				capture(data, function(result) {
 					expect(result).to.have.property('output').a('Array');
 				});	
 			});

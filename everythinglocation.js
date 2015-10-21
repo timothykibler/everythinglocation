@@ -26,7 +26,7 @@ module.exports.verify = function(query, callback) {
 	});
 };
 
-module.exports.complete = function(query, callback) {
+module.exports.capture = function(query, callback) {
 	request.post('https://api.everythinglocation.com/address/complete', {
 		headers: {
 			Accept: 'application/json'
