@@ -1,11 +1,5 @@
 var request = require('request');
 
-module.exports = {
-	verify: function(array) {
-		console.log("test");
-	}
-};
-
 module.exports.authenticate = function(username, password, callback) {
 	request.get('https://api.everythinglocation.com/user/verify', {
 			auth: {
@@ -15,7 +9,19 @@ module.exports.authenticate = function(username, password, callback) {
 			headers: {
 				Accept: 'application/json'
 			}
-		}, function (error, response, body) {
-			callback(JSON.parse(body));
+	}, function (error, response, body) {
+		callback(JSON.parse(body));
+	});
+};
+
+module.exports.verify = function(query, callback) {
+	request.post('https://api.everythinglocation.com/address/verify', {
+		headers: {
+			Accept: 'application/json'
+		},
+		json: true,
+		body: query
+	}, function(error, response, body) {
+		callback(body);
 	});
 };

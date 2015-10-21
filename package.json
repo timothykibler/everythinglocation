@@ -1,5 +1,5 @@
 {
-  "name": "elnodewrapper",
+  "name": "everythinglocation",
   "version": "1.0.0",
   "description": "Wrapper for www.everythinglocation.com API",
   "main": "everythinglocation.js",
