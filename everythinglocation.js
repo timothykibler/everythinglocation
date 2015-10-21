@@ -25,3 +25,15 @@ module.exports.verify = function(query, callback) {
 		callback(body);
 	});
 };
+
+module.exports.complete = function(query, callback) {
+	request.post('https://api.everythinglocation.com/address/complete', {
+		headers: {
+			Accept: 'application/json'
+		},
+		json: true,
+		body: query
+	}, function(error, response, body) {
+		callback(body);
+	});
+};

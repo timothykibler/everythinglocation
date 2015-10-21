@@ -4,11 +4,12 @@ var chai = require('chai'),
 	sinon = require('sinon'),
 	chaiAsPromised = require('chai-as-promised'),
 	sinonChai = require("sinon-chai"),
-	should = require('chai').should(),
+	expect = require('chai').expect,
 	request = require('request'),
 	el = require('../everythinglocation'),
 	authenticate = el.authenticate,
-	verify = el.verify
+	verify = el.verify,
+	complete = el.complete;
 	chai.use(sinonChai);
 
 	describe('#authenticate()', function() {
@@ -21,7 +22,7 @@ var chai = require('chai'),
 	
 			it('authenticates a user', function(done) {
 				 authenticate('good.user@gooduser.com', 'goodpassword', function(result) {
-				 	result.should.have.property('Status').equal('OK');
+				 	expect(result).to.have.property('Status').equal('OK');
 				 	done();
 				 });
 			});
@@ -40,7 +41,7 @@ var chai = require('chai'),
 
 			it('fails to authenticate a user', function(done) {
 				authenticate('bad.user@baduser.com', 'badpassword', function(result) {
-					result.should.have.property('Status').equal('Error');
+					expect(result).to.have.property('Status').equal('Error');
 					done();
 				});
 			});
@@ -53,21 +54,65 @@ var chai = require('chai'),
 	});
 
 	describe('#verify()', function() {
-
 		describe('successful verification', function() {
 			before(function(done) {
-			sinon.stub(request, 'post').yields(null, null, JSON.stringify({CountryName:'USA'}));
-			done();
+				sinon.stub(request, 'post').yields(null, null, {CountryName:'USA'});
+				done();
 			});
 	
 			it('verifies an address', function(done) {
 				verify([{Address1:'999 Baker Way', Country:'USA'}], function(result) {
-					result.should.have.property('CountryName').equal('USA');
+					expect(result).to.have.property('CountryName').equal('USA');
 					done();
 				}); 
 			});
 	
 			after(function(done) {
+				request.post.restore();
+				done();
+			});
+		});
+	});
+
+	describe('#complete()', function() {
+		it('should exist', function() {
+			expect(complete).to.not.be.undefined;
+		});
+		
+		describe('working callback', function() {
+			var spy = sinon.spy();
+			var data = {
+				query:'999 Baker Way', 
+				country: 'usa'
+			};
+
+			beforeEach(function(done) {
+				sinon.stub(request, 'post').yields(null, null, {Status: 'OK', output: [
+					{result: '999 Baker Way Ste 100, San Mateo CA'},
+					{result: '999 Baker Way Ste 110, San Mateo CA'},
+					{result: '999 Baker Way Ste 120, San Mateo CA'},
+					]});
+				done();
+			});	
+
+			it('should have a working callback', function() {
+				complete(data, spy);
+				expect(spy).to.have.been.called;
+			});	
+
+			it('should give back an OK status', function() {
+				complete(data, function(result) {
+					expect(result).to.have.property('Status').equal('OK');
+				});
+			});
+
+			it('should have an array of results', function() {
+				complete(data, function(result) {
+					expect(result).to.have.property('output').a('Array');
+				});	
+			});
+
+			afterEach(function(done) {
 				request.post.restore();
 				done();
 			});
