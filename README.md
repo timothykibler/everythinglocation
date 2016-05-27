@@ -3,17 +3,14 @@ Easily integrate the EverythingLocation API into your Node.js app
 
 Very simple to use wrapper for www.everythinglocation.com
 
-Not in NPM yet, still work in progress.
-
-If you want to manually include it as a dependency:
-
-```JSON
-"everythinglocation": "git://github.com/timothykibler/everythinglocation.git"
+Installation:
+```JAVASCRIPT
+npm -i everythinglocation
 ```
 
 Usage:
 ```JAVASCRIPT
-const everythinglocation = require('elwrapper')
+const everythinglocation = require('everythinglocation')
 let el = new everythinglocation.EverythingLocation('insertapikeyhere')
 
 el.verify({input:[{Address:'999 Baker Way San Mateo CA USA'}]}, (result) => {

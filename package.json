@@ -1,12 +1,22 @@
 {
   "name": "everythinglocation",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Wrapper for www.everythinglocation.com API",
   "main": "everythinglocation.js",
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha"
   },
   "author": "Timothy Kibler <timothy@kibler.me> (http://github.com/timothykibler)",
+  "repository": {
+    "type":"git",
+    "url":"https://github.com/timothykibler/everythinglocation.git"
+  },
+  "keywords": [
+    "address",
+    "verification",
+    "cloud",
+    "everythinglocation"
+  ],
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.3.0",
