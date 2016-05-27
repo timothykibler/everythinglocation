@@ -31,8 +31,9 @@ class EverythingLocation {
 	}
 
 	contactEL(path, query, callback) {
+		query.lqtkey = this.key
 		request
-			.post('https://api.everythinglocation.com/' + path + '?' + this.key, {
+			.post('https://api.everythinglocation.com/' + path, {
 				headers: {
 					Accept: 'application/json'
 				},
