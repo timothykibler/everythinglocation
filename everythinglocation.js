@@ -1,39 +1,47 @@
-var request = require('request');
+'use strict'
+var request = require('request')
 
-module.exports.authenticate = function(username, password, callback) {
-	request.get('https://api.everythinglocation.com/user/verify', {
-			auth: {
-				user: username,
-				pass: password
-			},
-			headers: {
-				Accept: 'application/json'
-			}
-	}, function (error, response, body) {
-		callback(JSON.parse(body));
-	});
-};
+class EverythingLocation {
+	constructor(apikey) {
+		this.key = apikey || null;
+	}
+	
+	get key() {
+		return this._key
+	}
+	
+	set key(apikey) {
+		this._key = apikey || null;
+	}
+	
+	verify(query, callback) {
+		this.contactEL('address/verify', query, callback)
+	}
+	
+	complete(query, callback) {
+		this.contactEL('address/complete', query, callback)
+	}
+	
+	email(query, callback) {
+		contactEL('email/verify', query, callback)
+	}
+	
+	capture(query, callback) {
+		contactEL('address/capture', query, callback)
+	}
+	
+	contactEL(path, query, callback) {
+		request
+			.post('https://api.everythinglocation.com/' + path + '?' + this.key, {
+				headers: {
+					Accept: 'application/json'
+				},
+				json: true,
+				body: query
+			}, (err, res, body) => {
+				callback(body)
+			})
+	}
+}
 
-module.exports.verify = function(query, callback) {
-	request.post('https://api.everythinglocation.com/address/verify', {
-		headers: {
-			Accept: 'application/json'
-		},
-		json: true,
-		body: query
-	}, function(error, response, body) {
-		callback(body);
-	});
-};
-
-module.exports.capture = function(query, callback) {
-	request.post('https://api.everythinglocation.com/address/complete', {
-		headers: {
-			Accept: 'application/json'
-		},
-		json: true,
-		body: query
-	}, function(error, response, body) {
-		callback(body);
-	});
-};
+module.exports.EverythingLocation = EverythingLocation
