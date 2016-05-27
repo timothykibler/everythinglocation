@@ -1,4 +1,4 @@
-# elwrapper
+# Everything Location API wrapper
 Easily integrate the EverythingLocation API into your Node.js app
 
 Very simple to use wrapper for www.everythinglocation.com
