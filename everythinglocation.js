@@ -2,8 +2,9 @@
 var request = require('request')
 
 class EverythingLocation {
-	constructor(apikey) {
+	constructor(apikey, endpoint) {
 		this.key = apikey || null;
+		this.endpoint = endpoint || null
 	}
 
 	get key() {
@@ -12,6 +13,14 @@ class EverythingLocation {
 
 	set key(apikey) {
 		this._key = apikey || null;
+	}
+
+	get endpoint() {
+		return this._endpoint
+	}
+
+	set endpoint(endpoint) {
+		this._endpoint = endpoint || 'https://api.everythinglocation.com/'
 	}
 
 	verify(query, callback) {
@@ -33,7 +42,7 @@ class EverythingLocation {
 	contactEL(path, query, callback) {
 		query.lqtkey = this.key
 		request
-			.post('https://api.everythinglocation.com/' + path, {
+			.post(this.endpoint + path, {
 				headers: {
 					Accept: 'application/json'
 				},
