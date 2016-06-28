@@ -5,7 +5,7 @@ Very simple to use wrapper for www.everythinglocation.com
 
 Installation:
 ```JAVASCRIPT
-npm -i everythinglocation
+npm install everythinglocation
 ```
 
 Usage:
