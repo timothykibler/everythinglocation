@@ -52,6 +52,20 @@ class EverythingLocation {
 				callback(body)
 			})
 	}
+
+	//legacy shit
+	verifySaas(path, callback) {
+
+		request
+			.get(this.endpoint + '/rest/?lqtkey=' + this.key + '&' + path, {
+				headers: {
+					Accept: 'application/json'
+				}
+			}, (err, res, body) => {
+				callback(body)
+			})
+
+	}
 }
 
 module.exports.EverythingLocation = EverythingLocation
