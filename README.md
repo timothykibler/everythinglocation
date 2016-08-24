@@ -10,8 +10,7 @@ npm install everythinglocation
 
 Usage:
 ```JAVASCRIPT
-const everythinglocation = require('everythinglocation')
-let el = new everythinglocation.EverythingLocation('insertapikeyhere')
+const everythinglocation = require('everythinglocation')('apikey', 'https://api.everythinglocation.com')
 
 el.verify({input:[{Address:'999 Baker Way San Mateo CA USA'}]}, (result) => {
   console.log(JSON.stringify(result))
