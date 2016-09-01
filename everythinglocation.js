@@ -25,6 +25,14 @@ class EverythingLocation {
     this._endpoint = this._endpoint.replace(/\/$/, '')
   }
 
+  get headers() {
+    return this._headers
+  }
+
+  set headers(headers) {
+    this._headers = headers
+  }
+
   verify(query, callback) {
     this.contactEL('/address/verify', query, callback)
   }
@@ -43,9 +51,10 @@ class EverythingLocation {
 
   contactEL(path, query, callback) {
     query.lqtkey = this.key
+
     request
       .post(this.endpoint + path, {
-        headers: {
+        headers: (this.headers)?this.headers:{
           Accept: 'application/json'
         },
         json: true,
